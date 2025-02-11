@@ -6,7 +6,8 @@ import defaultTweets from './assets/data/tweets.js'
 import userImport from './assets/data/user.js'
 
 import { createContext } from "react"
-const MyContext = createContext()
+const DataContext = createContext()
+const ThemeContext = createContext();
 
 function App() {
     const [tweets, setTweets] = useState(defaultTweets)
@@ -21,13 +22,15 @@ function App() {
 
     return (
         <div className="container">
-            <MyContext.Provider value={ { user, tweets, setTweets } }>
-                <Header theme={theme} setTheme={setTheme} />
-                <Tweets theme={theme}  />
-                <RightSide theme={theme} />
-            </MyContext.Provider>
+            <ThemeContext.Provider value={ { theme, setTheme } }>
+                <DataContext.Provider value={ { user, tweets, setTweets } }>
+                    <Header />
+                    <Tweets />
+                    <RightSide />
+                </DataContext.Provider>
+            </ThemeContext.Provider>
         </div>
     )
 }
 
-export { MyContext, App };
+export { DataContext as DataContext, ThemeContext as ThemeContext, App };

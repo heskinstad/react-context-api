@@ -2,18 +2,19 @@ import { useState } from 'react'
 import imgDoge from '../assets/images/doge.jpg'
 
 import { useContext } from "react"
-import { MyContext } from "../App.jsx"
+import { DataContext, ThemeContext } from "../App.jsx"
 
-export default function CreateTweet({ theme }) {
-    const context = useContext(MyContext);
+export default function CreateTweet() {
+    const dataContext = useContext(DataContext);
+    const themeContext = useContext(ThemeContext);
 
     const [content, setContent] = useState('')
 
     const addTweet = (e) => {
         e.preventDefault()
-        context.setTweets([
+        dataContext.setTweets([
             {
-                ...context.user,
+                ...dataContext.user,
                 date: '1m',
                 content,
                 commentCount: 0,
@@ -21,12 +22,12 @@ export default function CreateTweet({ theme }) {
                 heartCount: 0,
                 analyticsCount: 0
             },
-            ...context.tweets
+            ...dataContext.tweets
         ])
     }
 
     return (
-        <div className={theme === 'dark' ? 'create-tweet dark' : 'create-tweet'}>
+        <div className={themeContext.theme === 'dark' ? 'create-tweet dark' : 'create-tweet'}>
             <form onSubmit={addTweet}>
                 <div className="avatar-section">
                     <div className="profile-icon"><img src={imgDoge}/></div>
