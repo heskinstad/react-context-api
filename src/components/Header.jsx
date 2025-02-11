@@ -5,18 +5,19 @@ export default function Header() {
     const dataContext = useContext(DataContext);
     const themeContext = useContext(ThemeContext);
 
-
-
     const handleCheckChange = () => {
       if(themeContext.theme === 'dark') {
         themeContext.setTheme('light');
+        localStorage.setItem("theme", 'light');
       } else {
         themeContext.setTheme('dark');
+        localStorage.setItem("theme", 'dark');
       }
     }
 
     const handleButtonClick = () => {
-      console.log("CLICK!");
+      localStorage.removeItem("theme");
+      themeContext.setTheme('light');
     }
 
     return (
